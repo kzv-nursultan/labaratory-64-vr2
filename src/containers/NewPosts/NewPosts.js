@@ -4,6 +4,7 @@ import axiosPosts from '../../axiosPosts';
 import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
 import Spinner from '../../components/Spinner/Spinner';
+import moment from 'moment';
 
 
 
@@ -21,7 +22,8 @@ const NewPosts = () => {
 
         setNewPost(prevState=>({
             ...prevState,
-            [name]:value
+            [name]:value,
+            date: moment().format("DD-MM-YYYY hh:mm:ss")
         }));
     };
 
@@ -30,7 +32,7 @@ const NewPosts = () => {
         setLoading(true);
 
         const blog = {
-            post:{...newPost}
+            post:{...newPost},
         };
 
         try {

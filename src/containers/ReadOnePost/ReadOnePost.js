@@ -48,6 +48,9 @@ const ReadOnePost = props => {
                         {post.text}
                     </p>
                     <hr />
+                    <p className="mb-0">
+                        <strong>Created: </strong>{post.date}
+                    </p>
                      <p>
                          <Button color="warning" className='m-2' onClick={EditHandler}>
                              Edit

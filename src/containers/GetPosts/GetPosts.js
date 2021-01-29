@@ -22,16 +22,25 @@ const GetPosts = () => {
     },[])
 
     let list = (
-        <div>
-            {Object.keys(posts).map(key=>(
-                <PostsFromApi
-                key={key} 
-                title={posts[key]['post']['title']}
-                text={posts[key]['post']['text']}
-                id={key}/>
-            ))}
-        </div>
+        <p>
+            no messages yet
+        </p>
     );
+
+    if(posts !== null) {
+       list = (
+        <div>
+        {Object.keys(posts).map(key=>(
+            <PostsFromApi
+            key={key} 
+            title={posts[key]['post']['title']}
+            text={posts[key]['post']['text']}
+            id={key}
+            date={posts[key]['post']['date']}/>
+        ))}
+    </div>
+       )
+    };
 
     if(loading) {
         list = <Spinner/>

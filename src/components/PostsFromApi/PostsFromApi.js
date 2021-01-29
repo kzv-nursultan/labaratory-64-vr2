@@ -16,6 +16,9 @@ const PostsFromApi = props => {
             <h4 className="alert-heading">{props.title}</h4>
             <p>{props.text}</p>
             <hr/>
+            <p className="mb-0">
+                <strong>Created: </strong>{props.date}
+            </p>
             <div style={{width:'320px'}} className="d-flex">            
                 <Button color="danger" className='m-2' onClick={OnClickHandler}>
                     Read More    

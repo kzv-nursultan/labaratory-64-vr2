@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, CardBody } from 'reactstrap';
+import moment from 'moment';
 import axiosPosts from '../../axiosPosts';
 import Footer from '../../components/Footer/Footer';
 import NavBar from '../../components/NavBar/NavBar';
@@ -8,7 +9,7 @@ import Spinner from '../../components/Spinner/Spinner';
 const EditPosts = props => {
     const [newPost, setNewPost] = useState({
         title:'',
-        text:''
+        text:'',
         });
     const [loading, setLoading] = useState(false);
 
@@ -32,7 +33,8 @@ const EditPosts = props => {
     
             setNewPost(prevState=>({
                 ...prevState,
-                [name]:value
+                [name]:value,
+                date:moment().format("DD-MM-YYYY hh:mm:ss")
             }));
         };
     
