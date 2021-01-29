@@ -3,15 +3,17 @@ import { Button, Card, CardBody } from 'reactstrap';
 import axiosPosts from '../../axiosPosts';
 import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
+import Spinner from '../../components/Spinner/Spinner';
 
 
 
-const NewPosts = props => {
-    console.log(props)
+const NewPosts = () => {
     const [newPost, setNewPost] = useState({
     title:'',
     text:''
     });
+    const [loading, setLoading] = useState(false);
+
 
     const changeHandler = event => {
         const name = event.target.name;
@@ -25,30 +27,29 @@ const NewPosts = props => {
 
     const submitHandler = async e => {
         e.preventDefault();
+        setLoading(true);
+
         const blog = {
             post:{...newPost}
         };
+
         try {
             await axiosPosts.post('/blog.json', blog);      
         } finally {
-            console.log('posted');
             setNewPost({
             title:'',
             text:''
             });
+            setLoading(false);
         };
     };
 
-    
-    return(
-        <div>
-            <NavBar/>
-            <div className='container text-center m-5'>
-                <Card>
-                    <h3>Add New Post</h3>
-                    <CardBody>
-                    <form className='d-flex flex-column justify-content-center'
-                    onSubmit={(e)=>submitHandler(e)}>
+    let card = (
+        <Card>
+            <h3>Add Post</h3>
+            <CardBody>
+                <form className='d-flex flex-column justify-content-center'
+                onSubmit={(e)=>submitHandler(e)}>
                        <h5>Title:</h5>
 
                     <input type="text" 
@@ -72,8 +73,20 @@ const NewPosts = props => {
                             </strong>
                     </Button>
                 </form>
-                    </CardBody>
-                </Card>
+            </CardBody>
+        </Card>
+    );
+
+    if(loading){
+        card = <Spinner/>
+    };
+
+    
+    return(
+        <div>
+            <NavBar/>
+            <div className='container text-center m-5'>
+                {card}
             </div>
             <Footer/>
         </div>

@@ -16,7 +16,7 @@ const App = () => {
       <Route path='/contacts' component={Contacts}/>
       <Route path='/add' component={NewPosts}/>
       <Route path='/more/:id' component={ReadOnePost}/>
-      <Route path='/edit' component={EditPosts}/>
+      <Route path='/edit/:id' component={EditPosts}/>
     </Switch>
    </BrowserRouter>
   );
